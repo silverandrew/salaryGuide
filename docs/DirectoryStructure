@@ -1,0 +1,61 @@
+ASSETS
+This is the directory that is sent to the client. It contains the build js file, the image on the home page, the css, and
+the other javascript libraries used for the site (Zurb Foundation 5, JQuery, Slick carousel, and helper scripts).
+
+CONTROLLERS
+This defines the API endpoints for the different server functions and the file which serves the assets and templates directories
+
+DATABASE
+This is where you should put the database dump so that it is easy to load into postgres on the server
+
+DOCS
+Self-explanatory
+
+GULP
+These are the helper functions for gulp. The JSCRIPT file concatenates, minifies, and watches the source files for changes.
+The SERVER file watches the server for changes and reboots on file change (useful in development, unused on server).
+
+LAYOUTS
+This contains the index file served when a client connects to the server. This file handles the loading of the scripts/analytics
+as well as the navigation menu. Template files are dynamically loaded into the <ui-view></ui-view> directive in this file.
+
+LOGS
+This is where logs are served that keep track of searches and any errors that occur.
+
+NG
+This holds all of the Angular files. These files are concatenated and minified with the JSCRIPT function and placed in the assets directory.
+Any changes you make here must be "gulped" before they can be used by the client
+
+NODE_MODULES
+These are all the node packages used in the app. You SHOULD NOT mess with anything in here. If you do, you can rebuild the directory
+by running "$ npm install".
+
+TEMPLATES
+These hold all the "pages" that are injected into the <ui-view> directive in the APP file in the LAYOUTS directory.
+
+AUTH.JS
+This file contains the info for connecting to the database. It is used in other files in the app. The format is
+postgres://user:passwordn@localhost/database where user is the username of the database user, password is their password,
+and database is which database you wish to connect to. On the server, this should be set to postgres://readonly:readonly@localhost/*database*
+swapping out database for whichever holds the most recent information. On your dev environment, you should configure this so that
+you can connect as a local user.
+
+GULPFILE.JS
+This is the file that gulp looks at when running gulp commands from the command line. It points to the files in the GULP directory
+and also creates a "dev" task which sets up a watcher. It is useful to run "gulp dev" before you start making any changes to
+the app and it will automatically update and run the changes as you save the files.
+
+LOGGER.JS
+This is a helper function that formats logging. It is made to be called in other files in the app and formats the output to the
+LOGS directory.
+
+SERVER.JS
+This is the main file. When you have the project on the production server, you run this file to start it up. Basically, this file
+spins up multiple threads running the app. It also configures the server automatically and sets up routing to the endpoints
+using Express.
+
+PACKAGE.JSON
+This file has all the information for the app. It's important for NPM but you shouldn't have to mess with it at all manually.
+
+.GITIGNORE
+This is a gitignore file so that yo ucan host the project on the internal git repository.

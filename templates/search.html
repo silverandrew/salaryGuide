@@ -1,0 +1,75 @@
+<div id="advertisement" class="row text-center">
+    <iframe ng-show="device.desktop" id="desktop" name="3ccc9eeea3" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882100&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="728" height="90"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=3ccc9eeea3&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882100&cs=3ccc9eeea3&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+    <iframe ng-show="device.phone" id="phone" name="c021c439ea" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882102&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="300" height="50"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=c021c439ea&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882102&cs=c021c439ea&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+</div>
+
+<div class="row">
+    <div id="search" class="large-12 column">
+        <h2 class="text-center">Search by:</h2>
+
+        <div class="large-4 columns panel callout radius" >
+            <form class="text-center" ng-submit="searchByName(name)">
+                <label>Name
+                    <input class="large-12" style="height: 2.3125rem;" ng-model="name"/>
+                </label>
+                <button style="margin-top: 16px;" class="button small round" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="large-4 columns panel callout radius">
+            <form class="text-center" ng-submit="searchByDept(dept)">
+                <label>Department
+                    <select ng-model="dept">
+                        <option ng-model="dept" ng-repeat="obj in preload | orderBy:'name'" value="{{obj.code}}">{{obj.name}}</option>
+                    </select>
+                </label>
+                <button class="button small round" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="large-4 columns panel callout radius">
+            <form class="text-center" ng-submit="searchByCampus(campus)">
+                <label>Campus
+                    <select ng-model="campus">
+                        <option value="UA">University Administration</option>
+                        <option value="UIC">UIC</option>
+                        <option value="UIUC">UIUC</option>
+                        <option value="UIS">UIS</option>
+                    </select>
+                </label>
+                <button class="button small round" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="result" class="small-centered column" ng-show="display"><h4 class="text-center subheader">Results for <span>{{display}}</span> (click row for detailed view)</h4>
+        <table class="large-12 small-12 small-centered" ng-show="results">
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+            <tr ng-repeat="result in results" ng-click="details(result.id)">
+                <td>{{result.name}}</td>
+                <td>{{result.salary}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="panel info row" ng-hide="display">
+    <h1>FAQ</h1>
+    <h5>I don't like having my salary publicly available. Will you take it down?</h5>
+    <p class="panel">No. As an employee of a public entity, your salary is available as part of the public record. Salaries included in the Salary Guide are paid by tuition-paying students and tax dollars. There are no legal grounds for removal, but please contact us if you believe there is a factual error with the published salary.</p>
+    <h5>Are some salaries not included in the guide?</h5>
+    <p class="panel">Data included in the non-Gray Book excludes employees or jobs that are classified as extra help, graduate assistant, pre-doctoral fellow, academic or graduate hourly, summer appointment, medical resident, student, retiree or unpaid. It also does not include jobs classified as cell phone stipend, deferred pay, lump sum, one time pay, sabbatical supplement, temporary assignments or vacation payouts.</p>
+    <h5>How often is the Salary Guide updated?</h5>
+    <p class="panel">The Salary Guide is updated in the Fall semester each year. Salaries may be affected by events throughout the year, including mid-year promotions or unpaid leaves, and do not include all compensation, such as overtime and benefits. Factors such as experience, education and specialized training can all influence how much employees are paid. </p>
+    <h5>Can I get the raw data?</h5>
+    <p class="panel"><a href="http://www.bot.uillinois.edu/gray-book">The Gray Book</a> is available online.</p>
+    <h5>I'd like to request additional functionality - who should I talk to?</h5>
+    <p class="panel">You can reach the Web Development Team at <a href="mailto:webdev@illinimedia.com">webdev@illinimedia.com</a></p>
+    <h5>Why can't I see salaries from previous years?</h5>
+    <p class="panel">Salary data that is given to The Daily Illini has no primary key. A primary key is a unique identifier (such as your UIN or NetID) that allows us to keep track of who’s who across multiple datasets. Unfortunately, The Daily Illini is not given University ID numbers of faculty members because of identity security concerns, so there is currently no way to accurately display a person’s salary from multiple years. The Web Development Team is looking for a solution to this problem.</p>
+</div>

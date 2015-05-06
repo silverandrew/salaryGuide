@@ -1,0 +1,34 @@
+<div id="advertisement" class="row text-center">
+    <iframe ng-show="device.desktop" id="desktop" name="3ccc9eeea3" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882100&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="728" height="90"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=3ccc9eeea3&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882100&cs=3ccc9eeea3&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+    <iframe ng-show="device.phone" id="phone" name="c021c439ea" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882102&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="300" height="50"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=c021c439ea&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882102&cs=c021c439ea&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+</div>
+
+<div class="row">
+    <h1>Details for: <span>{{person.name}}</span></h1>
+    <ul class="no-bullet">
+        <li class="subheader">Salary: <h3>{{person.salary}}</h3></li>
+        <li ng-show="person.tenure">Tenure code: <h3>{{person.tenure}}</h3></li>
+        <li>How paid: <h3>{{person.payType}}</h3></li>
+    </ul>
+</div>
+<div class="row">
+    <h2>Currently held positions</h2>
+    <div class="panel callout radius" ng-repeat="detail in person.details">
+        <ul class="no-bullet">
+            <li>Position: {{detail.position}}</li>
+            <li>Department: {{detail.department}}</li>
+            <li>College: {{detail.college}}</li>
+            <li>Campus: {{detail.school}}</li>
+            <li>Class code: {{detail.classCode}}</li>
+            <li>Position pay: {{detail.positionPay}}</li>
+        </ul>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="column large-6">
+        <iframe id="adOne" name="d8a2e527db" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882105&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="300" height="250"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=d8a2e527db&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882105&cs=d8a2e527db&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+    </div>
+    <div class="column large-6">
+        <iframe id="adTwo" name="d8a2e527db" src="http://ox-d.oncampusweb.com/w/1.0/afr?auid=536882105&cb=INSERT_RANDOM_NUMBER_HERE" frameBorder="0" frameSpacing="0" scrolling="no" width="300" height="250"><a href="http://ox-d.oncampusweb.com/w/1.0/rc?cs=d8a2e527db&cb=INSERT_RANDOM_NUMBER_HERE" ><img src="http://ox-d.oncampusweb.com/w/1.0/ai?auid=536882105&cs=d8a2e527db&cb=INSERT_RANDOM_NUMBER_HERE" border="0" alt=""></a></iframe>
+    </div>
+</div>

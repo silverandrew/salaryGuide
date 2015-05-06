@@ -1,0 +1,31 @@
+/*****OVERVIEW*****\
+The Salary Guide is a javascript web app that runs on Node, Express, Angular, and Postgresql. This file is an overview of
+all these parts and how they work together. Since Salary Guide is javascript on both the front and back end it would be helpful
+if you are familiar with javascript. Check out these books: http://it-ebooks.info/book/274/ and http://it-ebooks.info/book/4712/
+
+NODE
+Node is a javascript runtime environment that allows you to use javascript outside of the browser. Unlike browser javascript
+it has access to the file system. This allows it to access databases and to read from and create files. To learn more about node,
+I recommend this book: http://it-ebooks.info/book/830/
+
+EXPRESS
+Express is a node module that helps by making it simpler to create an HTTP server. I recommend you check out these two books
+for help on express: http://it-ebooks.info/book/4688/ and http://it-ebooks.info/book/4687/
+
+ANGULAR
+Angular is a frontend javascript framework for single page apps. It's really fuckin complex and takes a lot of time to learn. If you know javascript,
+you should be able to understand what I've done in Angular by reading the comments in the code. If you want more info, I
+recommend this book: https://www.ng-book.com/
+
+POSTGRES
+Postgres is an open source database. It can be difficult to administer but it is fast, reliable, and cutting edge. I haven't
+found any GREAT postgres books but I recommend you check out the tutorial in the documentation on the website.
+
+/*****HOW IT WORKS*****\
+Here's a quick run-through of the system:
+1. We get salary data from the university.
+2. We clean the data and store it in postgres.
+3. We use node and express to host the webserver and connect it to the database.
+4. Build the system by running "gulp dev" in the command line.
+5. When a client connects to the site they are sent the entire app and all of the site content structured via angular.
+6. When the client searches someone, that request is sent to an endpoint on our API which queries postgres and sends back the response.
