@@ -20,7 +20,7 @@
             <form class="text-center" ng-submit="searchByDept(dept)">
                 <label>Department
                     <select ng-model="dept">
-                        <option ng-model="dept" ng-repeat="obj in preload | orderBy:'name'" value="{{obj.code}}">{{obj.name}}</option>
+                        <option ng-model="dept" ng-repeat="deptName in preload | orderBy" value="{{deptName}}">{{deptName}}</option>
                     </select>
                 </label>
                 <button class="button small round" type="submit">Search</button>

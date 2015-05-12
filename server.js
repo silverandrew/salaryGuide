@@ -28,6 +28,7 @@ if (cluster.isMaster) {
     app.use(require('./controllers/static'));
     app.use('/api/search', require('./controllers/api/search'));
     app.use('/api/details', require('./controllers/api/details'));
+    app.use('/api/departments', require('./controllers/api/departments'));
     server;
     logger.info('Worker (%s) is now listening to http://localhost:%s',
         cluster.worker.process.pid, port);

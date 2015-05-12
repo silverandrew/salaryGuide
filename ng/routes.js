@@ -2,7 +2,7 @@
  * Created by eli on 3/23/15.
  */
 angular.module('salaryGuide')
-    .config(['$stateProvider',function($stateProvider, preloadFactory){
+    .config(['$stateProvider',function($stateProvider, searchSvc){
         // These states correspond to the pages on the app. Hooks up templates and views
         $stateProvider.state('home',{
             url: '/',
@@ -12,7 +12,12 @@ angular.module('salaryGuide')
         .state('search',{
             url: '/search',
             templateUrl: 'search.html',
-            controller: 'searchCTRL'
+            controller: 'searchCTRL',
+            resolve: {
+                preloadOBJ: function($http) {
+                    return $http({method:'GET',url:'/api/departments'});
+                }
+            }
         })
         .state('details',{
                 // The :id is the string passed in from the URL corresponds to the personID in the the database

@@ -2,7 +2,7 @@
  * Created by eli on 3/23/15.
  */
 angular.module('salaryGuide')
-.controller('searchCTRL',function($scope, searchSVC, $location, $state, adSVC){
+.controller('searchCTRL',function($scope, searchSVC, $location, $state, adSVC, preloadOBJ){
     function capitalize(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
@@ -82,5 +82,5 @@ angular.module('salaryGuide')
     });
 
     // This loads the department search drop down
-    $scope.preload = searchSVC.preload();
+    $scope.preload = preloadOBJ.data;
 });

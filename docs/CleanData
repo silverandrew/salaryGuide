@@ -1,4 +1,58 @@
 Here I will walk you through the process of cleaning the data you get from the University. This is the FIRST THING YOU SHOULD DO
 before anything else.
 
-CURRENTLY WORKING ON WRITING A PYTHON SCRIPT TO MAKE THIS EASIER... TO BE FINISHED
+I made a really simple to use Python script that should work as long as we receive the data in the same format for years to come.
+The script is located in the cleansalaryguide directory.
+
+First, put your dirty CSVs from the University into the raw directory in cleansalary guide. Next, open clean.py and edit
+the top variables to point to the correct files. Make sure to change the finalFile variable or you will overwrite the old cleaned CSV.
+Now, run the script. It should have created a new, uniform dataset and put it into the finished directory. The next step is
+to get that data into the database.
+
+You should set up Postgresql on your own. Instructions here: http://www.postgresql.org/download/
+
+Then, we need to create the database. Run this command from the psql console:
+
+CREATE DATABASE salaryData
+
+**note: you won't have to do this if you restore from the backup in the database directory or if you already have the
+database created - in that case, just make sure you are in that database: '$ \connect salaryData'**
+
+Now we will create the table (you can copy/paste this command into psql console):
+
+create table data2014(
+college text,
+department text,
+name text,
+position text,
+positionSal money,
+totalSal money,
+campus text,
+empClass text,
+tenure text,
+howPaid text);
+
+**note: change the table name to dataYEAR for whichever year you are working on - this goes for all other commands in this file**
+
+Then we are going to load our data into that table:
+
+\COPY data2014 FROM 'path/to/newSalaryGuide/cleansalaryguide/finished/2014.csv' CSV HEADER;
+
+Now, we are going to create new IDs for each person based on their name and total salary:
+
+CREATE TABLE assignid (personid serial primary key, name text, totalsalary money, constraint nametotsal unique(name, totalsalary));
+INSERT INTO assignid (name, totalsalary) SELECT DISTINCT name, totalSal FROM data2014;
+ALTER TABLE data2014 ADD COLUMN personid int;
+UPDATE data2014 SET personid = (SELECT personid from assignid2014 WHERE assignid.name = data2014.name AND assignid.totalsalary = data2014.totalSal);
+
+After this, you should destroy the assignid table since we won't be using it anymore:
+
+DROP TABLE assignid
+
+Almost done. Now, we want to change the name format from Lastname, Firstname to Firstname Lastname:
+
+UPDATE data2014 SET name =  (CASE WHEN strpos(name,', ') > 0 THEN substr(name,strpos(name,', ') + 2)  ||' ' || substr(name,0, strpos(name,', ')) ELSE NULL END);
+
+Finally, export your database and put it into the database directory (this should be done from the command line, not from the psql console):
+
+pg_dump -U USERNAME salaryData > /path/to/newSalaryGuide/database/data2014.pgsql

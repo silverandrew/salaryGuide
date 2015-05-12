@@ -31,7 +31,8 @@
 var router = require('express').Router();
 var pg = require('pg');
 var connect = require('../../auth');
-var logger = require('../../logger')
+var logger = require('../../logger');
+var table = require('../../table');
 
 var Job = (function () {
     // This function creates a Job for whomever is being searched. A person may hold more than one job. Jobs are then stored in an array in the person object.
@@ -88,7 +89,7 @@ router.post('/', function (req, res, next) {
     var query;
     var client = new pg.Client(connect);
     var person = new Person(id);
-    query = client.query("SELECT * FROM rawdata WHERE personid = " + id.toString());
+    query = client.query("SELECT * FROM "+table+" WHERE personid = " + id.toString());
     client.connect(function (err) {
         if (err) {
             return console.error('could not connect to postgres', err);
@@ -96,7 +97,7 @@ router.post('/', function (req, res, next) {
         query.on('row', function (row, result) {
             // Only triggers the first time a row is returned and sets some info that is the same across all rows
             if (!person.flag) {
-                person.firstPass(row.employeename, row.tenure, row.totalsalary, row.howpaid);
+                person.firstPass(row.name, row.tenure, row.totalsal, row.howpaid);
             }
             // Triggers for every row that is returned and creates a job from that row
             person.addPosition(row.position, row.deptname, row.collegename, row.campus, row.classcode, row.positionsalary);

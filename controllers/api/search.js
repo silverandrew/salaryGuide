@@ -5,6 +5,7 @@ var router = require('express').Router();
 var pg = require('pg');
 var connect = require('../../auth');
 var winston = require('../../logger');
+var table = require('../../table');
 
 
 router.get('/', function (req, res, next) {
@@ -38,14 +39,14 @@ router.post('/', function (req, res, next) {
 
         winston.info({ query: name.replace("''","'"), address: req.connection.remoteAddress });
 
-        query = client.query("SELECT id, name, salary FROM emp_id WHERE name LIKE '"+name+"'" );
+        query = client.query("SELECT personid, name, totalSal FROM " + table + " WHERE name LIKE '"+name+"'" );
         client.connect(function(err) {
             if(err) {
                 winston.error('could not connect to postgres', { error: err });
                 return
             }
             query.on('row',function(row,result) {
-                var person = new Package(row.id,row.name,row.salary);
+                var person = new Package(row.id,row.name,row.totalsal);
                 simpleObjs.push(person);
                 result.addRow(row);
 
@@ -68,14 +69,14 @@ router.post('/', function (req, res, next) {
         var simpleObjs = [];
         winston.info(dept);
 
-        query = client.query("SELECT distinct personid, employeename, totalsalary From rawdata WHERE deptcode = '"+dept+"'");
+        query = client.query("SELECT distinct personid, name, totalSal From "+table+" WHERE department = '"+dept+"'");
         client.connect(function(err){
             if(err) {
                 winston.error(err);
                 return;
             }
             query.on('row', function(row,result){
-                var person = new Package(row.personid,row.employeename,row.totalsalary);
+                var person = new Package(row.personid,row.name,row.totalsal);
                 simpleObjs.push(person);
                 result.addRow(row);
             });
@@ -92,15 +93,14 @@ router.post('/', function (req, res, next) {
         var campus = req.body.campus;
         client = new pg.Client(connect);
         var simpleObjs = [];
-
-        query = client.query("SELECT distinct personid, employeename, totalsalary From rawdata WHERE campus = '"+campus+"'");
+        query = client.query("SELECT distinct personid, name, totalSal FROM "+table+" WHERE campus = ' "+campus+"'"); // PLEASE NOTE THE SPACE BEFORE THE CAMPUS VARIABLE - SOMETHING ISN'T RIGHT IN THE CLEANING SCRIPT
         client.connect(function(err){
             if(err) {
                 winston.error(err);
                 return;
             }
             query.on('row', function(row,result){
-                var person = new Package(row.personid,row.employeename,row.totalsalary);
+                var person = new Package(row.personid,row.name,row.totalsal);
                 simpleObjs.push(person);
                 result.addRow(row);
             });
