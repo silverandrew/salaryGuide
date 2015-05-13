@@ -1,7 +1,7 @@
 INSTRUCTIONS FOR INITIALIZING
     FOR DEVS
         1. set remote origin to this repo and pull it down
-        2. cd into root directory and run "$ npm install"
+        2. Install Node.js and cd into root directory and run "$ npm install"
         3. install and configure postgres and create a db called salaryData
         4. run "$ psql salaryData < database/backupfile" *backupfile is the dumped database stored in the database directory
         5. run "$ gulp dev"
