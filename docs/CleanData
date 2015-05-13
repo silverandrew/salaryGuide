@@ -53,6 +53,10 @@ Almost done. Now, we want to change the name format from Lastname, Firstname to 
 
 UPDATE data2014 SET name =  (CASE WHEN strpos(name,', ') > 0 THEN substr(name,strpos(name,', ') + 2)  ||' ' || substr(name,0, strpos(name,', ')) ELSE NULL END);
 
+Now, you just need to update table.js to point to the new table you are using and it will update the rest of the app:
+
+module.exports = "data2014"
+
 Finally, export your database and put it into the database directory (this should be done from the command line, not from the psql console):
 
 pg_dump -U USERNAME salaryData > /path/to/newSalaryGuide/database/data2014.pgsql

@@ -1,6 +1,9 @@
 /**
  * Created by eli on 3/23/15.
  */
+
+// To add a new page to the site, you will be adding a state here, setting the URL and template file, and connecting it to a controller.
+// Optionally, the resolve method takes an object of functions that will be called before the controller is instantiated. Good for preloading data
 angular.module('salaryGuide')
     .config(['$stateProvider',function($stateProvider, searchSvc){
         // These states correspond to the pages on the app. Hooks up templates and views
@@ -14,6 +17,7 @@ angular.module('salaryGuide')
             templateUrl: 'search.html',
             controller: 'searchCTRL',
             resolve: {
+                // This queries the server for distinct departments and preloads the departments drop down
                 preloadOBJ: function($http) {
                     return $http({method:'GET',url:'/api/departments'});
                 }
@@ -27,6 +31,8 @@ angular.module('salaryGuide')
         })
     }])
     .run(['$state',function($state){
+        // Everything inside here will be run one time once the app has loaded. Good place to initialize anything you will be using
         $state.go('home');
         $(document).foundation();
     }]);
+

@@ -2,7 +2,11 @@
  * Created by eli on 3/23/15.
  */
 angular.module('salaryGuide')
-.controller('searchCTRL',function($scope, searchSVC, $location, $state, adSVC, preloadOBJ){
+.controller('searchCTRL',function($scope, searchSVC, $location, $state, adSVC, preloadOBJ, $controller){
+
+    // This tells the page to inherit from the adCTRL
+    $controller('adCTRL',{$scope: $scope});
+
     function capitalize(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
@@ -70,16 +74,8 @@ angular.module('salaryGuide')
 
     // If user click on one of the people in the table it sends the id to the server and grabs all of that person's info then redirects to details page
     $scope.details = function(id){
-        $state.go('details',{id: id})
+        $state.go('details',{id: id}) // The id is also passed into the URL here
     };
-
-    // This is used to place the ads on the page
-    $scope.device = adSVC.getDevice();
-    $(window).resize(function(){
-        $scope.$apply(function(){
-            $scope.device = adSVC.getDevice();
-        });
-    });
 
     // This loads the department search drop down
     $scope.preload = preloadOBJ.data;

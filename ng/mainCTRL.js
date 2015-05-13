@@ -2,7 +2,11 @@
  * Created by eli on 3/26/15.
  */
 angular.module('salaryGuide')
-.controller('mainCTRL',function($scope, adSVC){
+.controller('mainCTRL',function($scope, adSVC, $controller){
+
+        // Inherit from adCTRL
+        $controller('adCTRL',{$scope: $scope});
+
         // This is for the story carousel on the main page
         $(document).ready(function(){
             $("#carousel").slick({
@@ -15,10 +19,4 @@ angular.module('salaryGuide')
                 centerMode: true
             });
         });
-        $scope.device = adSVC.getDevice();
-        $(window).resize(function(){
-            $scope.$apply(function(){
-                $scope.device = adSVC.getDevice();
-            });
-        })
     });

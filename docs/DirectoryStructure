@@ -59,3 +59,7 @@ This file has all the information for the app. It's important for NPM but you sh
 
 .GITIGNORE
 This is a gitignore file so that yo ucan host the project on the internal git repository.
+
+TABLE.JS
+This file's only purpose is to direct to the table that is being used in the database. It's here so that you only have to change it
+in one spot and it will update the entire app.
