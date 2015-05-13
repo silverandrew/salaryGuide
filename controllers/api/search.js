@@ -46,7 +46,7 @@ router.post('/', function (req, res, next) {
                 return
             }
             query.on('row',function(row,result) {
-                var person = new Package(row.id,row.name,row.totalsal);
+                var person = new Package(row.personid,row.name,row.totalsal);
                 simpleObjs.push(person);
                 result.addRow(row);
 

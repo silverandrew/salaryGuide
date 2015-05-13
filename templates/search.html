@@ -49,10 +49,12 @@
             <tr>
                 <th>Name</th>
                 <th>Salary</th>
+                <th>Id</th>
             </tr>
             <tr ng-repeat="result in results" ng-click="details(result.id)">
                 <td>{{result.name}}</td>
                 <td>{{result.salary}}</td>
+                <th>{{result.id}}</th>
             </tr>
         </table>
     </div>

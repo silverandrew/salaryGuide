@@ -74,7 +74,7 @@ angular.module('salaryGuide')
 
     // If user click on one of the people in the table it sends the id to the server and grabs all of that person's info then redirects to details page
     $scope.details = function(id){
-        $state.go('details',{id: id}) // The id is also passed into the URL here
+        $state.go('details',{id: id}); // The id is also passed into the URL here
     };
 
     // This loads the department search drop down
