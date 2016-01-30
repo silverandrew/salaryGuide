@@ -58,6 +58,11 @@ router.post('/', function (req, res, next) {
         ].join(' ');
     }
 
+    if (req.body.sort) {
+        values.push(req.body.sort.field);
+        text += " ORDER BY $" + values.length + req.body.sort.desc ? " DESC" : " ASC";
+    }
+
     pg.connect(connect, function(err, client, done) {
         if (err) {
             return winston.error('could not connect to postgres', {error: err});
