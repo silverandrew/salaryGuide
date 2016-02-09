@@ -100,7 +100,7 @@ router.post('/', function (req, res, next) {
                 person.firstPass(row.name, row.tenure, row.totalsal, row.howpaid);
             }
             // Triggers for every row that is returned and creates a job from that row
-            person.addPosition(row.position, row.deptname, row.collegename, row.campus, row.classcode, row.positionsalary);
+            person.addPosition(row.position, row.department, row.college, row.campus, row.empclass, row.positionsal);
             result.addRow(row);
         });
         query.on('end', function (result) {
