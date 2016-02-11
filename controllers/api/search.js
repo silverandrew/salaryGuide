@@ -32,8 +32,8 @@ router.post('/', function (req, res, next) {
         var name = "%" + req.body.name.split(' ').join("%") + "%";
 
         // Don't de-dupe if a name is specified
-        // If we remove distinct from name list, we end up with a set of
-        // the same person keyed to the same idea bc of many appointments
+        // If we remove distinct from name query, we end up with redundant 
+        // results for each ID due to multiple appointments
         // Not sure if ideal
         //text = text.replace(" DISTINCT", "");
 
