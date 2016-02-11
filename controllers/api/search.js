@@ -32,7 +32,10 @@ router.post('/', function (req, res, next) {
         var name = "%" + req.body.name.split(' ').join("%") + "%";
 
         // Don't de-dupe if a name is specified
-        text = text.replace(" DISTINCT", "");
+        // If we remove distinct from name list, we end up with a set of
+        // the same person keyed to the same idea bc of many appointments
+        // Not sure if ideal
+        //text = text.replace(" DISTINCT", "");
 
         conditions.push('name ILIKE $' + ++paramNum);
         values.push(name);
