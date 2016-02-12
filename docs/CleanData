@@ -43,7 +43,7 @@ Now, we are going to create new IDs for each person based on their name and tota
 CREATE TABLE assignid (personid serial primary key, name text, totalsalary money, constraint nametotsal unique(name, totalsalary));
 INSERT INTO assignid (name, totalsalary) SELECT DISTINCT name, totalSal FROM data2014;
 ALTER TABLE data2014 ADD COLUMN personid int;
-UPDATE data2014 SET personid = (SELECT personid from assignid2014 WHERE assignid.name = data2014.name AND assignid.totalsalary = data2014.totalSal);
+UPDATE data2014 SET personid = (SELECT personid from assignid WHERE assignid.name = data2014.name AND assignid.totalsalary = data2014.totalSal);
 
 After this, you should destroy the assignid table since we won't be using it anymore:
 
