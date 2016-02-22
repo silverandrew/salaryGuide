@@ -32,7 +32,10 @@ router.post('/', function (req, res, next) {
         var name = "%" + req.body.name.split(' ').join("%") + "%";
 
         // Don't de-dupe if a name is specified
-        text = text.replace(" DISTINCT", "");
+        // If we remove distinct from name query, we end up with redundant 
+        // results for each ID due to multiple appointments
+        // Not sure if ideal
+        //text = text.replace(" DISTINCT", "");
 
         conditions.push('name ILIKE $' + ++paramNum);
         values.push(name);
