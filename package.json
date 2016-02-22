@@ -23,5 +23,8 @@
     "gulp-uglify": "^1.1.0",
     "pg": "^4.3.0",
     "winston": "^1.0.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^0.26.5"
   }
 }

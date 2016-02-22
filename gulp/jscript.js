@@ -6,9 +6,12 @@ var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
+var fs = require('fs-extra');
+var path = require('path');
 
 
 gulp.task('js', function () {
+    fs.ensureDirSync(path.resolve(__dirname, '../logs'));
     gulp.src(['ng/module.js', 'ng/**/*.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))

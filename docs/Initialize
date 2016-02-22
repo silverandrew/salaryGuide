@@ -3,11 +3,12 @@ INSTRUCTIONS FOR INITIALIZING
         1. set remote origin to this repo and pull it down
         2. Install Node.js and cd into root directory and run "$ npm install"
         3. install and configure postgres and create a db called salaryData
-        4. run "$ psql salaryData < database/backupfile" *backupfile is the dumped database stored in the database directory
-        5. run "$ gulp dev"
-        6. point browser to http://localhost:3000
-        7. ???
-        8. profit
+        4. Change auth.example.js to export your connection string and rename to auth.js
+        5. run "$ psql salaryData < database/backupfile" *backupfile is the dumped database stored in the database directory
+        6. run "$ gulp dev"
+        7. point browser to http://localhost:3000
+        8. ???
+        9. profit
 
     SERVER
         1. clone the repo into the directory you want to run it from
