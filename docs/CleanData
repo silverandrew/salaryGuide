@@ -21,15 +21,12 @@ database created - in that case, just make sure you are in that database: '$ \co
 Now we will create the table (you can copy/paste this command into psql console):
 
 create table data2014(
-college text,
 department text,
 name text,
 position text,
 positionSal money,
-totalSal money,
-campus text,
-empClass text,
-tenure text,
+hiredate text,
+time text,
 howPaid text);
 
 **note: change the table name to dataYEAR for whichever year you are working on - this goes for all other commands in this file**
@@ -38,12 +35,12 @@ Then we are going to load our data into that table:
 
 \COPY data2014 FROM 'path/to/newSalaryGuide/cleansalaryguide/finished/2014.csv' CSV HEADER;
 
-Now, we are going to create new IDs for each person based on their name and total salary:
+Now, we are going to create new IDs for each person based on their name and position salary:
 
-CREATE TABLE assignid (personid serial primary key, name text, totalsalary money, constraint nametotsal unique(name, totalsalary));
-INSERT INTO assignid (name, totalsalary) SELECT DISTINCT name, totalSal FROM data2014;
+CREATE TABLE assignid (personid serial primary key, name text, positionsalary money, constraint nametotsal unique(name, positionsalary));
+INSERT INTO assignid (name, positionsalary) SELECT DISTINCT name, positionSal FROM data2014;
 ALTER TABLE data2014 ADD COLUMN personid int;
-UPDATE data2014 SET personid = (SELECT personid from assignid WHERE assignid.name = data2014.name AND assignid.totalsalary = data2014.totalSal);
+UPDATE data2014 SET personid = (SELECT personid from assignid WHERE assignid.name = data2014.name AND assignid.positionsalary = data2014.positionSal);
 
 After this, you should destroy the assignid table since we won't be using it anymore:
 

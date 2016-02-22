@@ -36,12 +36,9 @@ var table = require('../../table');
 
 var Job = (function () {
     // This function creates a Job for whomever is being searched. A person may hold more than one job. Jobs are then stored in an array in the person object.
-    function Job(position, department, college, campus, classCode, positionPay) {
+    function Job(position, department, positionPay) {
         this.position = position;
         this.department = department;
-        this.college = college;
-        this.school = campus;
-        this.classCode = classCode;
         this.positionPay = positionPay;
     }
     return Job;
@@ -49,12 +46,11 @@ var Job = (function () {
 var Person = (function () {
     // This function creates a person object to be sent to the client
     function Person(id) {
-        this.addPosition = function (position, department, college, campus, classCode, positionPay) {
-            var x = new Job(position, department, college, campus, classCode, positionPay);
+        this.addPosition = function (position, department, positionPay) {
+            var x = new Job(position, department, positionPay);
             this.details.push(x);
         };
         this.name = null;
-        this.tenure = null;
         this.salary = null;
         this.id = id;
         this.payType = null;
@@ -62,9 +58,8 @@ var Person = (function () {
         this.flag = false;
     }
     // Person.flag is how we keep track of whether the person object has been initialized with name/tenure/salary/paytype
-    Person.prototype.firstPass = function (name, tenure, salary, payType) {
+    Person.prototype.firstPass = function (name, salary, payType) {
         this.name = name;
-        this.tenure = tenure;
         this.salary = salary;
         this.payType = payType;
         this.flag = true;
@@ -73,7 +68,6 @@ var Person = (function () {
         return {
             name: this.name,
             salary: this.salary,
-            tenure: this.tenure,
             id: this.id,
             payType: this.payType,
             details: this.details
@@ -97,7 +91,7 @@ router.post('/', function (req, res, next) {
         query.on('row', function (row, result) {
             // Only triggers the first time a row is returned and sets some info that is the same across all rows
             if (!person.flag) {
-                person.firstPass(row.name, row.tenure, row.totalsal, row.howpaid);
+                person.firstPass(row.name, row.totalsal, row.howpaid);
             }
             // Triggers for every row that is returned and creates a job from that row
             person.addPosition(row.position, row.department, row.college, row.campus, row.empclass, row.positionsal);
